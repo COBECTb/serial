@@ -95,6 +95,13 @@ func openPort(name string, baud int, databits byte, parity Parity, stopbits Stop
 		cflagToUse |= unix.PARODD
 	case ParityEven:
 		cflagToUse |= unix.PARENB
+	case ParitySpace:
+		cflagToUse |= unix.PARENB
+		cflagToUse |= unix.CMSPAR
+		cflagToUse |= unix.PARODD
+	case ParityMark:
+		cflagToUse |= unix.PARENB
+		cflagToUse |= unix.CMSPAR
 	default:
 		return nil, ErrBadParity
 	}
